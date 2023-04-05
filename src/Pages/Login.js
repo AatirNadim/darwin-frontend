@@ -15,6 +15,7 @@ const LoginPage = () => {
       <img
         style={{
           flex: 0.65,
+          width: '65vw',
         }}
         src={loginAsset} alt='loginAsset' />
       <LoginComp />
