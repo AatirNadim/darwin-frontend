@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const LoginComp = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -20,27 +22,43 @@ const LoginComp = () => {
     // }
   }, [])
 
-  const handleSubmit = () => {
-    const obj = {
-      username,
-      password
-    }
-    localStorage.setItem('user', JSON.stringify(obj));
-    
+  const handleSubmit = async () => {
+    // const obj = {
+    //   username,
+    //   password
+    // }
+    // localStorage.setItem('user', JSON.stringify(obj));
+    alert('inside handleSubmit');
+    const data_obj = { "uid": "satmis10000", "password": "Asdf1234#", "blocked": 0 }
+    const data = JSON.stringify(data_obj)
+    const str = btoa(data);
+    const req_obj = JSON.stringify({
+      payload: btoa(data)
+    })
 
-    if(obj) {
-      console.log('user', obj);
-      setLoggedIn(true);
-      navigate('/dashboard');
+    try {
+      const res = await axios.post('https://myphysio.digitaldarwin.in/api/login_v1', {
+        payload: str,
+      })
+      alert('res', res);
+    } catch (err) {
+      alert('error from the post api', err)
     }
-    else {
-      alert('user not added')
-    }
-    setUsername('');
-    setPassword('');
+
+    // if (obj) {
+    //   console.log('user', obj);
+    //   setLoggedIn(true);
+    //   navigate('/dashboard');
+    // }
+    // else {
+    //   alert('user not added')
+    // }
+    // setUsername('');
+    // setPassword('');
   }
 
 
+  // }
   return (
     <div
       style={{
@@ -49,20 +67,20 @@ const LoginComp = () => {
       }}
     >
       <form action='' onSubmit={handleSubmit}>
-          <input type='text' value = {username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-              console.log(e.target.value);
-            }}
-          />
-          <input  
-            type='password' value = {password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              console.log(e.target.value);
-            }}
-          />
-          <button type='submit'>Login</button>
+        <input type='text' value={username}
+          onChange={(e) => {
+            setUsername(e.target.value);
+            console.log(e.target.value);
+          }}
+        />
+        <input
+          type='password' value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            console.log(e.target.value);
+          }}
+        />
+        <button type='submit'>Login</button>
       </form>
     </div>
   )

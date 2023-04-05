@@ -8,7 +8,12 @@ const Dashboard = () => {
     localStorage.removeItem('user');
     navigate('/login');
   }
-
+  React.useEffect(() => {
+    const obj = localStorage.getItem('user');
+    if (!obj) {
+      navigate('/login');
+    }
+  })
   return (
     <div
       style={{
