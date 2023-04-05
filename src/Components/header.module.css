@@ -1,0 +1,31 @@
+h1 {
+    margin: auto;
+    height: 80%;
+    width: 98%;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    line-height:  70px;
+        /* // fontSize: '3.5vw', */
+    font-size: max(3.5vw, 30px);
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_div {
+    display: flex;
+    height: 20vh;
+}
+
+@media screen and (max-width: 525px) {
+    .main_div {
+        height: 25vh;
+    }
+}
