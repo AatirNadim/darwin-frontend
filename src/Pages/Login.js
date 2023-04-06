@@ -2,7 +2,7 @@ import React from 'react'
 import LoginComp from '../Components/LoginComp'
 import loginAsset from '../Assets/loginAsset.png'
 
-
+// please use "admin" as username and password
 const LoginPage = () => {
   return (
     <div

@@ -6,6 +6,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from './Pages/Login'
 import Dashboard from './Pages/Dashboard'
 
+// please use "admin" as username and password
+
 const App = () => {
     return (
         <BrowserRouter  >
