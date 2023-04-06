@@ -22,29 +22,48 @@ const LoginComp = () => {
     // }
   }, [])
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     // const obj = {
     //   username,
     //   password
     // }
     // localStorage.setItem('user', JSON.stringify(obj));
-    alert('inside handleSubmit');
+    // alert('inside handleSubmit');
     const data_obj = { "uid": "satmis10000", "password": "Asdf1234#", "blocked": 0 }
     const data = JSON.stringify(data_obj)
     const str = btoa(data);
     const req_obj = JSON.stringify({
       payload: btoa(data)
     })
+    // not working
 
-    try {
-      const res = await axios.post('https://myphysio.digitaldarwin.in/api/login_v1', {
-        payload: str,
-      })
-      alert('res', res);
-    } catch (err) {
-      alert('error from the post api', err)
-    }
+    // const pro = fetch('https://myphysio.digitaldarwin.in/api/login_v1/', {
+    //   mode : 'no-cors',
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     // "access-control-allow-origin" : "*",
+    //   },
+    //   body: req_obj
+    // })
+    //   pro.then(res => res.json()).then(data => {
+    //   console.log('data', data);
+    // }).catch(err => {
+    //   console.log('err', err);
+    // })
 
+    // axios.post('https://myphysio.digitaldarwin.in/api/login_v1/', {
+    //   payload: str
+    // },
+    //   {
+    //     headers : {"Access-Control-Allow-Origin": "*"}
+    //   }
+    // ).then(res => {
+    //   console.log('res', res);
+    // }).catch(err => {
+    //   console.log('err', err);
+    // })
     // if (obj) {
     //   console.log('user', obj);
     //   setLoggedIn(true);
@@ -55,8 +74,38 @@ const LoginComp = () => {
     // }
     // setUsername('');
     // setPassword('');
+    // ------------------------------------------------------------------------------
+    // try {
+    console.log(JSON.stringify({
+      userName: username,
+      password: password
+    }))
+    fetch('http://localhost:5000/userLogin', {
+      method: 'POST',
+      body: JSON.stringify({
+        userName: username,
+        password: password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then((res) => {
+      res.json().then((obj) => {
+        localStorage.setItem('user', obj);
+        console.log('obj', obj);
+        console.log('user', obj.user.userName);
+        console.log('token', obj.token);
+        navigate('/dashboard');
+      });
+    })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
+  // const { user, token } = JSON.parse(res);
+  // const res = await req.json();
+  // console.log('res', res);
 
   // }
   return (
